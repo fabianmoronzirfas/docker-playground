@@ -5,23 +5,18 @@ services:
 before_install:
   - docker build -t  fabianmoronzirfas/docker-playground -f Dockerfile.dev .
 
+
 script:
   - docker run fabianmoronzirfas/docker-playground npm test -- --coverage
-# node_js:
-#   - "10"
-# branches:
-#   only:
-#     - master
 
-# cache:
-#   directories:
-#     - node_modules
-# install:
-#   - npm install
-# before_script:
-#   # running code climate
-#   - echo "before"
-# script:
-#   - npm test
-# after_script:
-#   - echo "after"
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-playground"
+  env: "DockerPlayground-env"
+  bucket_name: "elasticbeanstalk-us-east-1-254973975500"
+  bucket_path: "docker-playground"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_ID"
+  secret_access_key: "AWS_SECRET_ACCESS_KEY"
