@@ -17,7 +17,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React/Docker/Compose Up
+            Learn React/Docker/Compose Up/Travis/AWS
           </a>
         </header>
       </div>
