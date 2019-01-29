@@ -1,0 +1,21 @@
+sudo: false
+dist: xenial
+language: node_js
+node_js:
+  - "10"
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - node_modules
+install:
+  - npm install
+before_script:
+  # running code climate
+  - echo "before"
+script:
+  - npm test
+after_script:
+  - echo "after"
