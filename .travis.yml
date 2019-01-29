@@ -1,21 +1,27 @@
-sudo: false
-dist: xenial
-language: node_js
-node_js:
-  - "10"
-branches:
-  only:
-    - master
+sudo: required
+# dist: xenial
+services:
+  - docker
+before_install:
+  - docker build -t  fabianmoronzirfas/docker-playground -f Dockerfile.dev .
 
-cache:
-  directories:
-    - node_modules
-install:
-  - npm install
-before_script:
-  # running code climate
-  - echo "before"
 script:
-  - npm test
-after_script:
-  - echo "after"
+  - docker run fabianmoronzirfas/docker-playground npm test -- --coverage
+# node_js:
+#   - "10"
+# branches:
+#   only:
+#     - master
+
+# cache:
+#   directories:
+#     - node_modules
+# install:
+#   - npm install
+# before_script:
+#   # running code climate
+#   - echo "before"
+# script:
+#   - npm test
+# after_script:
+#   - echo "after"
