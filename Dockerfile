@@ -9,6 +9,8 @@ RUN npm run build
 # naming the phase is not needed here
 # but still nice
 FROM nginx as server
-WORKDIR /usr/share/nginx/html
-COPY --from=build /app/build .
+# We need the expose instruction for
+# running it on Elasticbeanstalk
+EXPOSE 80
+COPY --from=build /app/build /usr/share/nginx/html
 
