@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:
+      context: . # where to look for files
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules # don't map agains internal
+      - .:/app # map outside pwd tp internal folder
+  test:
+    build:
+      context: . # where to look for files
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules # don't map agains internal
+      - .:/app # map outside pwd tp internal folder
+    command: ["npm", "test"]
